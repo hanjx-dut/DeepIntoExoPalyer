@@ -1,8 +1,8 @@
-#  开发者指南 [【原文】](<https://exoplayer.dev/>)
+[开发者指南原文](https://exoplayer.dev/)
 
-## 2. 开始使用
+# 2. 开始使用
 
-### 2.1 [**Hello world!**](https://exoplayer.dev/hello-world.html)
+## 2.1 [**Hello world!**](https://exoplayer.dev/hello-world.html)
 
 > 也可以使用ExoPlayer codelab 来开始。Another way to get started is to work through the [ExoPlayer codelab](https://codelabs.developers.google.com/codelabs/exoplayer-intro/).
 
@@ -16,9 +16,9 @@
 
 以下是步骤详细说明。完整示例请参参考[参考应用](https://github.com/google/ExoPlayer/tree/release-v2/demos/main/)中的`PlayerActivity`.
 
-#### 2.1.1 将ExoPlayer添加为依赖项
+### 2.1.1 将ExoPlayer添加为依赖项
 
-##### 1. 添加存储库
+#### 1. 添加存储库
 
 在项目根目录的`build.gradle`中添加Google和JCenter库。
 
@@ -29,7 +29,7 @@ repositories {
 }
 ```
 
-##### 2. 添加ExoPlayer依赖
+#### 2. 添加ExoPlayer依赖
 
 接下来，在 app module 的`build.gradle` 中添加依赖项。以下内容将对完整的ExoPlayer库添加依赖项：
 
@@ -57,7 +57,7 @@ implementation 'com.google.android.exoplayer:exoplayer-ui:2.X.X'
 
 除了库模块之外，ExoPlayer还具有多个扩展模块，这些扩展模块依赖于外部库来提供附加功能。浏览 [扩展目录](https://github.com/google/ExoPlayer/tree/release-v2/extensions/)及其各自的自述文件以了解详细信息。
 
-##### 3. Java 8
+#### 3. Java 8
 
 在`build.gradle`中添加以下内容到ExoPlayer 来打开所有文件中的Java 8支持：
 
@@ -67,7 +67,7 @@ compileOptions {
 }
 ```
 
-#### 2.1.2 创建播放器
+### 2.1.2 创建播放器
 
 您可以使用`SimpleExoPlayer.Builder`或`ExoPlayer.Builder`创建`ExoPlayer`实例。builder提供了一系列用于创建`ExoPlayer`实例的定制选项。绝大多数情况都应该使用 `SimpleExoPlayer.Builder`。此构建器返回 `SimpleExoPlayer`，它扩展自`ExoPlayer`以便添加其他高级播放器功能。以下代码是创建的示例`SimpleExoPlayer`。
 
@@ -85,7 +85,7 @@ SimpleExoPlayer player = new SimpleExoPlayer.Builder(context).build();
 
 有关ExoPlayer线程模型的更多信息，请参见[ExoPlayer Javadoc “线程模型”部分](https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/ExoPlayer.html) 。
 
-#### 2.1.3 将播放器添加到视图
+### 2.1.3 将播放器添加到视图
 
 ExoPlayer库提供了一个`PlayerView`，其中封装了 `PlayerControlView`，`SubtitleView`和 `Surface`来渲染视频。`PlayerView`可以包含在应用程序的布局XML。将播放器绑定到视图很简单：
 
@@ -96,7 +96,7 @@ playerView.setPlayer(player);
 
 如果您需要在播放器控制细粒度的控制和`Surface` 在其上渲染视频，可以设置玩家的目标`SurfaceView`， `TextureView`，`SurfaceHolder`或`Surface`直接使用`SimpleExoPlayer`的 `setVideoSurfaceView`，`setVideoTextureView`，`setVideoSurfaceHolder`和 `setVideoSurface`对应的方法。您也可以`PlayerControlView`用作独立组件，或实现自己的播放控件，这些控件直接与播放器进行交互。`SimpleExoPlayer`的`addTextOutput`方法可用于在播放期间接收字幕。
 
-#### 2.1.4 初始化 Player
+### 2.1.4 初始化 Player
 
 在ExoPlayer中，每种媒体都由`MediaSource`表示。要播放某种媒体，您必须先创建一个对应的媒体`MediaSource`，然后将此对象传递给`ExoPlayer.prepare`。ExoPlayer库提供 `MediaSource`DASH（`DashMediaSource`），SmoothStreaming（`SsMediaSource`），HLS（`HlsMediaSource`）和常规媒体文件（`ProgressiveMediaSource`）的实现。以下代码显示了如何准备`MediaSource`适合播放MP4文件的播放器。
 
@@ -112,19 +112,19 @@ MediaSource videoSource =
 player.prepare(videoSource);
 ```
 
-#### 2.1.5 控制播放器
+### 2.1.5 控制播放器
 
 准备好播放器后，可以通过调用播放器上的方法来控制播放。例如，`setPlayWhenReady`开始和暂停播放，各种`seekTo`方法都可以在媒体中搜索，`setRepeatMode`控制是否循环媒体以及如何循环播放，`setShuffleModeEnabled`控制播放列表改组以及 `setPlaybackParameters`调整播放速度和音高。
 
 如果播放器绑定到`PlayerView`或`PlayerControlView`，则用户与这些组件的交互将导致调用播放器上的相应方法。
 
-#### 2.1.6 释放播放器
+### 2.1.6 释放播放器
 
 在不再需要播放器时将其释放十分重要的，这样可以释放有限的资源（例如视频解码器）供其他应用程序使用。这可以通过调用来完成`ExoPlayer.release`。
 
 
 
-### 2.2 监听播放器事件 [**Listening to player events**](https://exoplayer.dev/listening-to-player-events.html)
+## 2.2 监听播放器事件 [**Listening to player events**](https://exoplayer.dev/listening-to-player-events.html)
 
 状态更改和播放错误等事件将报告给已注册 [`Player.EventListener`](https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/Player.EventListener.html)实例。注册监听器以接收此类事件：
 
@@ -135,7 +135,7 @@ player.addListener(eventListener);
 
 `Player.EventListener`有空的默认方法，因此您只需要实现需要的方法即可。有关方法及其调用时间的完整说明，请参见[Javadoc](https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/Player.EventListener.html)。其中最重要的两个是 `onPlayerStateChanged`和`onPlayerError`，下面将对其进行详细说明。
 
-##### a) 播放器状态变更
+#### a) 播放器状态变更
 
 播放器状态的变化可以通过`onPlayerStateChanged(boolean playWhenReady, int playbackState)`在已注册的`Player.EventListener`中接收。播放器可以处于以下四种播放状态之一：
 
@@ -162,7 +162,7 @@ public void onIsPlayingChanged(boolean isPlaying) {
 }
 ```
 
-##### b) 播放器错误
+#### b) 播放器错误
 
 播放错误可以通过`onPlayerError(ExoPlaybackException error)`在已注册的`Player.EventListener`中监听。发生故障时，该方法会在播放状态转换为`Player.STATE_IDLE`的回调之前立即调用。失败或停止播放后可以通过`ExoPlayer.retry`来重试。
 
@@ -192,7 +192,7 @@ public void onPlayerError(ExoPlaybackException error) {
 }
 ```
 
-##### c) 搜索 //TODO 机翻调整
+#### c) 搜索 //TODO 机翻调整
 
 调用`Player.seekTo`方法会导致对已注册`Player.EventListener`实例的一系列回调 ：
 
@@ -202,7 +202,7 @@ public void onPlayerError(ExoPlaybackException error) {
 
 如果您使用`AnalyticsListener`，则会在`onSeekStarted`之前有一个附加事件 `onPositionDiscontinuity`，以指示在搜寻开始之前的播放位置。
 
-#### 其他SimpleExoPlayer监听器
+### 其他SimpleExoPlayer监听器
 
 使用时`SimpleExoPlayer`，可以在播放器中注册更多监听器。
 
@@ -214,7 +214,7 @@ public void onPlayerError(ExoPlaybackException error) {
 
 ExoPlayer的UI组件（例如`PlayerView`）将自己注册他们所需要的事件的侦听器。因此，使用上述方法进行手动注册仅对实现自己的播放器UI或需要出于其他目的监听事件的应用程序有用。
 
-#### 使用EventLogger
+### 使用EventLogger
 
 默认情况下，ExoPlayer仅记录错误。要将播放事件记录到控制台， 可以使用`EventLogger`类。它提供的其他日志记录有助于理解播放器的操作以及调试播放问题。`EventLogger`实现了`AnalyticsListener`，因此使用`SimpleExoPlayer`注册实例将十分简单：
 
@@ -222,7 +222,7 @@ ExoPlayer的UI组件（例如`PlayerView`）将自己注册他们所需要的事
 player.addAnalyticsListener(new EventLogger(trackSelector));
 ```
 
-#### 输出日志
+### 输出日志
 
 查看日志的最简单方法是使用Android Studio的[logcat选项卡](https://developer.android.com/studio/debug/am-logcat)。您可以通过程序包名称（如果使用的是演示应用，包名为`com.google.android.exoplayer2.demo`）将您的应用程序选择为调试进程， 并通过选择”仅显示所选应用程序”来告诉logcat选项卡仅记录该应用程序。可以使用表达式 `EventLogger|ExoPlayerImpl`过滤`EventLogger`和播放器本身的日志。
 
@@ -232,7 +232,7 @@ Android Studio的logcat标签的替代方法是使用shell命令。例如：
 adb logcat EventLogger:* ExoPlayerImpl:* *:s
 ```
 
-##### a) 播放器信息
+#### a) 播放器信息
 
 `ExoPlayerImpl`类输出包含应用使用的播放器版本，设备和操作系统的两行日志：
 
@@ -241,7 +241,7 @@ ExoPlayerImpl: Release 2cd6e65 [ExoPlayerLib/2.9.6] [marlin, Pixel XL, Google, 2
 ExoPlayerImpl: Init 2e5194c [ExoPlayerLib/2.9.6] [marlin, Pixel XL, Google, 26]
 ```
 
-##### b) 播放状态
+#### b) 播放状态
 
 播放状态更改将输出为以下格式。在此示例中，在初始缓冲之后，播放没有再进入缓冲状态，并且被用户暂停了一次：
 
@@ -262,7 +262,7 @@ EventLogger: state [eventTime=131.89, mediaPos=128.27, window=0, period=0, true,
 - `[boolean]`：`playWhenReady`标志。
 - `[string]`：当前播放状态。
 
-##### c) 媒体曲目
+#### c) 媒体曲目
 
 当可用或选定的曲目更改时，`EventLogger`将记录曲目信息。在播放开始时至少发生一次。以下示例显示了自适应流的跟踪记录：
 
@@ -293,7 +293,7 @@ EventLogger: downstreamFormatChanged [3.64, 0.00, window=0, period=0, id=134, mi
 EventLogger: downstreamFormatChanged [3.64, 0.00, window=0, period=0, id=140, mimeType=audio/mp4a-latm, bitrate=127868, codecs=mp4a.40.2, channels=2, sample_rate=44100]
 ```
 
-##### d) 解码器选择
+#### d) 解码器选择
 
 在大多数情况下，ExoPlayer使用`MediaCodec`从基础平台获取的媒体来渲染媒体。在报告任何播放状态之前，日志记录将告诉您已初始化了哪些解码器。例如：
 
@@ -304,7 +304,7 @@ EventLogger: decoderInitialized [0.79, 0.00, window=0, period=0, audio, OMX.goog
 
 
 
-### 2.3 媒体来源 **[Media sources](https://exoplayer.dev/media-sources.html)**
+## 2.3 媒体来源 [Media sources](https://exoplayer.dev/media-sources.html)
 
 在ExoPlayer中，每种媒体都由`MediaSource`标识。ExoPlayer库提供了`MediaSource`的几种流类型的实现：
 
@@ -315,15 +315,15 @@ EventLogger: decoderInitialized [0.79, 0.00, window=0, period=0, audio, OMX.goog
 
 `PlayerActivity`在[主演示应用程序中](https://github.com/google/ExoPlayer/tree/release-v2/demos/main/)可以找到实例化这四个实例的[示例](https://github.com/google/ExoPlayer/tree/release-v2/demos/main/)。
 
-#### 2.3.1 MediaSource组成
+### 2.3.1 MediaSource组成
 
 除上述MediaSource，ExoPlayer库还提供`ConcatenatingMediaSource`，`ClippingMediaSource`， `LoopingMediaSource`和`MergingMediaSource`。这些`MediaSource` 实现可通过合成实现更复杂的播放功能。下面描述了一些常见的用例。注意，尽管以下一些示例是在视频播放的上下文中描述的，但它们同样适用于仅音频的播放，实际上也适用于任何支持的媒体类型的播放。
 
-##### a) 播放播放列表
+#### a) 播放播放列表
 
 播放列表使用`ConcatenatingMediaSource`，该播放列表允许按顺序播放多个`MediaSource`。`ConcatenatingMediaSource`允许播放期间动态的添加和删除`MediaSource`。有关更多信息，请参见[播放列表页面](https://exoplayer.dev/playlists.html)。
 
-##### b) 剪辑视频
+#### b) 剪辑视频
 
 `ClippingMediaSource`可用于剪辑`MediaSource`来仅播放其中的一部分。以下示例将视频播放剪辑为从5秒开始到10秒结束。
 
@@ -342,7 +342,7 @@ ClippingMediaSource clippingSource =
 
 > 剪辑视频文件的开头时，请尽可能使起始位置与关键帧对齐。如果起始位置未与关键帧对齐，则播放器将需要解码并丢弃从前一个关键帧直到起始位置的数据，然后才能开始播放。这将在播放开始时引入短暂的延迟，包括当播放器将 `ClippingMediaSource`作为列表或循环播放时。
 
-##### c) 循环播放视频
+#### c) 循环播放视频
 
 > 无限循环，推荐使用`ExoPlayer.setRepeatMode`而非 `LoopingMediaSource`。
 
@@ -355,7 +355,7 @@ MediaSource source =
 LoopingMediaSource loopingSource = new LoopingMediaSource(source, 2);
 ```
 
-##### d) 侧面加载字幕文件
+#### d) 侧面加载字幕文件
 
 给定一个视频文件和一个单独的字幕文件，可以使用`MergingMediaSource`将它们合并为一个源以进行播放。
 
@@ -377,7 +377,7 @@ MergingMediaSource mergedSource =
     new MergingMediaSource(videoSource, subtitleSource);
 ```
 
-#### 2.3.2 更多组合类型
+### 2.3.2 更多组合类型
 
 可以进一步组合`MediaSource`以用于更特殊的用例。给定两个视频A和B，以下示例显示了如何 一起使用`LoopingMediaSource`和`ConcatenatingMediaSource`使他们成为播放序列（A，A，B）。
 
@@ -407,7 +407,7 @@ ConcatenatingMediaSource concatenatedSource =
 
 
 
-###  2.4 播放列表 [**Playlists**](https://exoplayer.dev/playlists.html)
+##  2.4 播放列表 [**Playlists**](https://exoplayer.dev/playlists.html)
 
 使用`ConcatenatingMediaSource`实现播放列表，该播放列表允许按顺序播放多个`MediaSource`。以下示例表示由两个视频组成的播放列表。
 
@@ -423,11 +423,11 @@ ConcatenatingMediaSource concatenatedSource =
 
 播放列表中项目之间的转换是无缝的。不需要它们具有相同的格式（例如，播放列表中可以同时包含H264和VP9视频）。它们甚至可能具有不同的类型（例如，播放列表同时包含视频和音频流都可以）。允许`MediaSource`在播放列表中多次使用相同的内容。
 
-#### 2.4.1 修改播放列表
+### 2.4.1 修改播放列表
 
 `ConcatenatingMediaSource`允许播放期间动态的添加和删除`MediaSource`。可以在播放之前和播放期间通过调用对应的`ConcatenatingMediaSource` 方法来完成此操作。播放器会在播放过程中以正确的方式自动处理修改。例如，如果`MediaSource`移动了当前播放的文件，则播放不会中断，并且新的后继文件将在完成后播放。如果`MediaSource`删除了当前正在播放的播放器，则播放器将自动移动到播放剩余的第一个后继播放器，如果不存在此后继播放器，则过渡到结束状态。
 
-#### 2.4.2 识别播放列表项
+### 2.4.2 识别播放列表项
 
 为了简化播放列表项的标识，`MediaSource`可以在工厂类中为每个项设置自定义标签。这可以是uri，标题或任何其他自定义对象。可以使用`player.getCurrentTag`查询当前播放项目的标签。调用`player.getCurrentTimeline`返回的当前`Timeline` 中也在`Timeline.Window`对象中包括了所有的标签 。
 
@@ -449,7 +449,7 @@ public void onPositionDiscontinuity(@Player.DiscontinuityReason int reason) {
 }
 ```
 
-#### 2.4.3 检测播放何时过渡到其他项目
+### 2.4.3 检测播放何时过渡到其他项目
 
 当前播放项目更改时可能有三种类型的事件回调：
 
@@ -461,7 +461,7 @@ public void onPositionDiscontinuity(@Player.DiscontinuityReason int reason) {
 
 
 
-### 2.5 轨道选择[**Track selection**](https://exoplayer.dev/track-selection.html)
+## 2.5 轨道选择[**Track selection**](https://exoplayer.dev/track-selection.html)
 
 轨道选择确定播放器播放哪些媒体轨道。每个`ExoPlayer`创建后都可以提供一个`TrackSelector`实例，用于实现轨道选择。
 
@@ -487,7 +487,7 @@ trackSelector.setParameters(
 
 
 
-### 2.6 UI组件 [**UI components**](https://exoplayer.dev/ui-components.html)
+## 2.6 UI组件 [**UI components**](https://exoplayer.dev/ui-components.html)
 
 应用程序播放媒体需要用于显示媒体和控制播放的用户界面组件。ExoPlayer库包括一个UI模块，其中包含许多UI组件。要依赖UI模块，请添加一个依赖项，如下所示，其中`2.X.X`是您的首选版本（最新版本可以参考[release notes](https://github.com/google/ExoPlayer/tree/release-v2/RELEASENOTES.md)）。
 
@@ -502,7 +502,7 @@ implementation 'com.google.android.exoplayer:exoplayer-ui:2.X.X'
 
 这两个视图都具有`setPlayer`一种用于绑定和解绑（通过置为`null`）播放器实例的方法。
 
-#### 2.6.1 PlayerView
+### 2.6.1 PlayerView
 
 `PlayerView`可用于视频和音频播放。在播放视频时，它会渲染视频和字幕，并可以显示作为元数据包含在音频文件中的图稿。您可以像其他任何UI组件一样在布局文件中添加`PlayerView`：
 
@@ -539,7 +539,7 @@ playerView.setPlayer(player);
 player.prepare(createMediaSource());
 ```
 
-##### 选择surface type（~~这个词不知道该咋翻合适~~）
+#### 选择surface type（~~这个词不知道该咋翻合适~~）
 
 `PlayerView`的`surface_type`属性可让您设置用于视频播放的surface type。除了值`spherical_gl_surface_view`（用于球形视频~~(???这是个啥)~~播放一个特殊值）和 `video_decoder_gl_surface_view`（用于使用扩展渲染器渲染的视频），可选值包括`surface_view`，`texture_view`和`none`。
 
@@ -556,7 +556,7 @@ player.prepare(createMediaSource());
 
 > 某些Android TV设备以低于显示器全分辨率的分辨率运行在其UI层，从而将其放大以呈现给用户。例如，UI层可以在具有4K显示屏的Android TV上以1080p的分辨率运行。在此类设备上，`SurfaceView`必须用于以全分辨率显示内容。可以使用[`Util.getPhysicalDisplaySize`](https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/util/Util.html#getPhysicalDisplaySize-android.content.Context-)来查询显示器的全分辨率（在其当前显示模式下）。可以使用Android的[`Display.getSize`](https://developer.android.com/reference/android/view/Display.html#getSize(android.graphics.Point))API 查询UI层分辨率。
 
-#### 2.6.2 PlayerControlView
+### 2.6.2 PlayerControlView
 
 `PlayerView`内部使用`PlayerControlView`提供播放控制。对于特定的用例`PlayerControlView`，也可以用作独立组件。它可以像其他任何UI组件一样添加至布局文件中：
 
@@ -587,15 +587,15 @@ private void initializePlayer() {
 }
 ```
 
-#### 2.6.3 定制
+### 2.6.3 自定义
 
 在需要大量自定义的地方，我们希望应用程序开发人员将实现自己的UI组件，而不是使用ExoPlayer的UI模块提供的组件。也就是说，所提供的UI组件确实可以通过设置属性（如上所述），覆盖可绘制对象，覆盖布局文件以及指定自定义布局文件来进行自定义。
 
-##### 覆盖drawables
+#### 覆盖drawables
 
 `PlayerControlView`（与它的默认布局文件）使用的 drawables 可以通过在你的应用程序中定义的名称相同的绘图资源覆盖。有关[`PlayerControlView`](https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/ui/PlayerControlView.html)可覆盖的可绘制对象的列表，请参见 Javadoc。由于`PlayerView`使用`PlayerControlView`，因此覆盖这些可绘制对象`PlayerView`也适用。
 
-##### 覆盖布局文件
+#### 覆盖布局文件
 
 当`PlayerView`从布局文件`exo_player_view.xml`加载；`PlayerControlView`从布局文件 `exo_player_control_view.xml`加载。要自定义这些布局，应用程序可以在其自己的`res/layout*`目录中定义具有相同名称的布局文件。这些布局文件将覆盖ExoPlayer库提供的文件。
 
@@ -627,7 +627,7 @@ private void initializePlayer() {
 
 ![将标准播放控件（左）替换为自定义控件（右）](https://exoplayer.dev/images/overriding-layoutfiles.png)
 
-##### 自定义布局文件
+#### 自定义布局文件
 
 如果想在整个应用程序中更改布局，覆盖布局文件是绝佳的解决方案，但是如果仅在单个位置需要自定义布局怎么办？为此，首先定义一个布局文件，就像覆盖默认布局之一一样，但是这次给它一个不同的文件名，例如`custom_controls.xml`。其次，使用属性指示在放大视图时应使用此布局。例如，当使用时 `PlayerView`，可以使用`controller_layout_id`属性指定加载布局以提供播放控件：
 
@@ -640,7 +640,7 @@ private void initializePlayer() {
 
 
 
-### 2.7 下载媒体 [Downloading media](https://exoplayer.dev/downloading-media.html)
+## 2.7 下载媒体 [Downloading media](https://exoplayer.dev/downloading-media.html)
 
 ExoPlayer提供了下载媒体功能以供离线播放。在大多数使用情况下，即使您的应用程序处于后台，也希望继续下载。对于这些用例，您的应用程序应为`DownloadService`的子类，并将命令发送至服务以添加，删除和控制下载。下图显示了涉及的主要类。
 
@@ -650,7 +650,7 @@ ExoPlayer提供了下载媒体功能以供离线播放。在大多数使用情�
 - `DownloadManager`：管理多个下载，从`DownloadIndex`加载（和存储）它们的状态，并根据网络连接等要求开始和停止下载。要下载内容，管理员通常会从中读取正在下载的数据 `HttpDataSource`，然后将其写入中`Cache`。
 - `DownloadIndex`：保留下载状态。
 
-#### 2.7.1 创建DownloadService
+### 2.7.1 创建DownloadService
 
 要创建`DownloadService`，您需要对其进行子类化并实现其抽象方法：
 
@@ -676,7 +676,7 @@ ExoPlayer提供了下载媒体功能以供离线播放。在大多数使用情�
 
 有关具体示例，请在ExoPlayer演示应用程序中查看[`DemoDownloadService`](https://github.com/google/ExoPlayer/tree/release-v2/demos/main/src/main/java/com/google/android/exoplayer2/demo/DemoDownloadService.java)和[`AndroidManifest.xml`](https://github.com/google/ExoPlayer/tree/release-v2/demos/main/src/main/AndroidManifest.xml)。
 
-#### 2.7.2 创建DownloadManager
+### 2.7.2 创建DownloadManager
 
 以下代码段演示了如何实例化`DownloadManager`，随后可以在`DownloadService`调用`getDownloadManager()`获取到它：
 
@@ -709,7 +709,7 @@ downloadManager.setMaxParallelDownloads(3);
 
 > 演示应用程序中的示例从旧版`ActionFile`实例导入下载状态。仅在您的应用程序使用2.10.0版本之前的ExoPlayer 中使用`ActionFile`时才需要这样做。
 
-#### 2.7.3 添加下载
+### 2.7.3 添加下载
 
 要添加下载，您需要创建一个`DownloadRequest`并将其发送到 `DownloadService`。对于自适应流，`DownloadHelper`可以使用它来帮助构建 `DownloadRequest`，如[本页下所述](https://exoplayer.dev/downloading-media.html#downloading-and-playing-adaptive-streams)。以下示例展示了如何为渐进式流创建下载请求：
 
@@ -737,7 +737,7 @@ DownloadService.sendAddDownload(
 
 `MyDownloadService`是应用程序`DownloadService`的子类，其中`foreground`参数控制服务是否将在前台启动。如果您的应用程序已经在前台，则`foreground` 通常应将该参数设置为`false`，因为`DownloadService`如果它确定有工作要做，则会将自己置于前台。
 
-#### 2.7.4 移除下载
+### 2.7.4 移除下载
 
 一个下载可以通过发送一个删除命令到被移除`DownloadService`，其中，`contentId`标识要移除的下载：
 
@@ -751,7 +751,7 @@ DownloadService.sendRemoveDownload(
 
 您也可以使用删除所有下载的数据 `DownloadService.sendRemoveAllDownloads`。
 
-#### 2.7.5 开始和停止下载
+### 2.7.5 开始和停止下载
 
 如果满足以下四个条件，则下载将持续进行：
 
@@ -762,7 +762,7 @@ DownloadService.sendRemoveDownload(
 
 通过向您的`DownloadService`发送命令，可以控制所有这些条件 。
 
-##### 设置和清除下载停止原因
+#### 设置和清除下载停止原因
 
 可以为单个或全部下载设置被停止的原因：
 
@@ -788,7 +788,7 @@ DownloadService.sendSetStopReason(
 
 当下载具有非零停止原因时，它将处于 `Download.STATE_STOPPED`状态。
 
-##### 暂停和恢复所有下载
+#### 暂停和恢复所有下载
 
 可以按以下方式暂停和恢复所有下载：
 
@@ -808,7 +808,7 @@ DownloadService.sendResumeDownloads(
 
 暂停下载后，它将处于`Download.STATE_QUEUED`状态。
 
-##### 设置下载进度的要求
+#### 设置下载进度的要求
 
 [`Requirements`](https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/scheduler/Requirements.html)可以用于指定下载必须满足的约束。如上例[所示](https://exoplayer.dev/downloading-media.html#creating-a-downloadmanager)，可以在创建`DownloadManager`通过调用`DownloadManager.setRequirements()`来设置要求 。也可以通过将命令发送到`DownloadService`来动态更改它们：
 
@@ -823,19 +823,19 @@ DownloadService.sendSetRequirements(
 
 当由于不满足要求而无法进行下载时，它将处于`Download.STATE_QUEUED`状态。您可以使用`DownloadManager.getNotMetRequirements()`查询未满足的要求的下载。
 
-##### 设置最大并行下载数
+#### 设置最大并行下载数
 
 可以通过调用`DownloadManager.setMaxParallelDownloads()`设置最大并行下载数 。如上例[所示](https://exoplayer.dev/downloading-media.html#creating-a-downloadmanager)，通常在创建`DownloadManager`时完成此操作。
 
 当由于达到并行下载的最大数量而无法进行下载时，它将处于此`Download.STATE_QUEUED`状态。
 
-#### 2.7.6 查询下载
+### 2.7.6 查询下载
 
 每个`DownloadManager`中都包含`DownloadIndex`用于可以查询所有下载的状态，包括那些已完成或失败的状态。可以通过调用`DownloadManager.getDownloadIndex()`来获得`DownloadIndex`。然后，可以通过调用`DownloadIndex.getDownloads()`遍历获取所有下载 。或者，可以通过调用`DownloadIndex.getDownload()`查询单个下载的状态。
 
 `DownloadManager`还提供了`DownloadManager.getCurrentDownloads()`，它仅返回当前（即未完成或失败）下载的状态。此方法对于更新通知和其他显示当前下载进度和状态的UI组件很有用。
 
-#### 2.7.7 监听下载
+### 2.7.7 监听下载
 
 您可以为`DownloadManager`添加一个侦听器，以在当前下载更改状态时得到通知：
 
@@ -850,7 +850,7 @@ downloadManager.addListener(
 
 > 下载进度更新不会触发`DownloadManager.Listener`。如果您需要更新显示下载进度的UI组件，您应该以所需的更新速率定期查询`DownloadManager`。[`DownloadService`](https://github.com/google/ExoPlayer/tree/release-v2/library/core/src/main/java/com/google/android/exoplayer2/offline/DownloadService.java) 包含一个示例，该示例会定期更新前台服务通知。
 
-#### 2.7.8 播放下载的内容
+### 2.7.8 播放下载的内容
 
 播放下载的内容类似于播放在线内容，区别是将从下载`Cache`而不是通过网络读取数据。
 
@@ -867,7 +867,7 @@ ProgressiveMediaSource mediaSource = new ProgressiveMediaSource
 player.prepare(mediaSource);
 ```
 
-#### 2.7.9 下载和播放自适应流
+### 2.7.9 下载和播放自适应流
 
 自适应流（例如DASH，SmoothStreaming和HLS）通常包含多个媒体轨道。通常会有多条轨道包含质量不同的相同内容（例如SD，HD和4K视频轨道）。也可能有多个相同类型的轨道包含不同的内容（例如，多种语言的音频轨道）。
 
@@ -904,6 +904,6 @@ MediaSource mediaSource =
 
 
 
-### 2.8 [Ad insertion](https://exoplayer.dev/ad-insertion.html)
+## 2.8 [Ad insertion](https://exoplayer.dev/ad-insertion.html)
 
 略

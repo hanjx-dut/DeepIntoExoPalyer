@@ -1,8 +1,8 @@
-#  开发者指南 [【原文】](<https://exoplayer.dev/>)
+[开发者指南原文](https://exoplayer.dev/)
 
-## 1. 概述
+# 1. 概述
 
-### 1.0 首页 [Home](https://exoplayer.dev/)
+## 1.0 首页 [Home](https://exoplayer.dev/)
 
 ExoPlayer是 Android 平台的应用程序级媒体播放器。提供了Android MediaPlayer API的替代方法，可以播放本地和网络上的音频和视频。ExoPlayer 支持 Android MediaPlayer API 当前不支持的功能，包括 _DASH_ 和 _SmoothStreaming_ 自适应播放。与 MediaPlayer API 不同，ExoPlayer 易于自定义和扩展，可以通过 Play 商店应用程序更新进行更新。
 
@@ -15,7 +15,7 @@ ExoPlayer是 Android 平台的应用程序级媒体播放器。提供了Android 
 + 浏览库[Javadoc](https://exoplayer.dev/doc/reference)。
 + 浏览源代码以获取[最新版本](https://github.com/google/ExoPlayer/tree/release-v2)和[最新分支](https://github.com/google/ExoPlayer/tree/dev-v2)。
 
-### 1.1 优劣 [pros-and-cons](https://exoplayer.dev/pros-and-cons.html)
+## 1.1 优劣 [pros-and-cons](https://exoplayer.dev/pros-and-cons.html)
 
 与 Android 内置的 MediaPlayer 相比，ExoPlayer 具有许多优势：
 
@@ -33,7 +33,7 @@ ExoPlayer是 Android 平台的应用程序级媒体播放器。提供了Android 
 + 对于某些设备上的纯音频播放，ExoPlayer可能比MediaPlayer消耗更多的电池。有关详细信息，请参见[电池消耗页面](https://exoplayer.dev/battery-consumption.html)。
 + 在您的应用程序中包含ExoPlayer会使APK大小增加几百千字节。对于极轻量级的应用程序，这可能仅是一个问题。可以在[APK缩小页面](https://exoplayer.dev/shrinking.html)上找到缩小ExoPlayer的指南。
 
-## 1.2 演示应用 [Demo application](https://exoplayer.dev/demo-application.html)
+# 1.2 演示应用 [Demo application](https://exoplayer.dev/demo-application.html)
 
 ExoPlayer 的主要演示应用程序具有两个主要目的：
 
@@ -42,7 +42,7 @@ ExoPlayer 的主要演示应用程序具有两个主要目的：
 
 本节介绍如何获取，编译和运行演示应用，以及如何使用它播放您自己的媒体。
 
-#### 1.2.1 获取代码
+### 1.2.1 获取代码
 
 主演示应用的源代码可以在 [GitHub项目](https://github.com/google/ExoPlayer) 的 `demos/main` 目录找到。如果您尚未克隆项目，请将项目克隆到本地目录中：
 (注：github clone 十分缓慢，可以尝试导入到码云再克隆或自行搜索其他办法，本人仓库可用于 clone [ExoPlayer (更新时间2020.7.14)](https://gitee.com/han_jx_dut/ExoPlayer.git))
@@ -55,7 +55,7 @@ git clone https://github.com/google/ExoPlayer.git
 
 ![Android Studio中的项目](https://exoplayer.dev/images/demo-app-project.png)
 
-#### 1.2.2 编译并运行
+### 1.2.2 编译并运行
 
 在 Android Studio 中选择 `demo` 项目即可编译和运行演示应用程序。该演示应用程序将在连接的 Android 设备上安装并运行。我们建议您尽可能使用物理设备。如果您想使用模拟器，请阅读[受支持设备](https://exoplayer.dev/supported-devices.html)的仿模拟器部分，并确保您的虚拟设备使用的 API 级别至少为 23 的系统映像。
 
@@ -69,7 +69,7 @@ git clone https://github.com/google/ExoPlayer.git
 adb logcat EventLogger:V *:E
 ```
 
-#### 1.2.3 启用互动媒体广告
+### 1.2.3 启用互动媒体广告
 
 ExoPlayer 具有[IMA扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/ima)，可使用 [Interactive Media Ads SDK](https://developers.google.com/interactive-media-ads) 轻松通过您的内容获利。要在演示应用程序中启用扩展，请打开 Android Studio 的 Build Variants 视图，并将演示模块的构建变量设置为 `withExtensionsDebug` 或 `withExtensionsRelease` 如图 3 所示。
 
@@ -77,7 +77,7 @@ ExoPlayer 具有[IMA扩展](https://github.com/google/ExoPlayer/tree/release-v2/
 
 启用IMA扩展程序后，您可以在演示应用程序的示例列表中的“ IMA示例广告代码”下找到获利内容的示例。
 
-#### 1.2.4 启用扩展解码器
+### 1.2.4 启用扩展解码器
 
 ExoPlayer 具有许多扩展，允许使用捆绑的软件解码器，包括 AV1, VP9, Opus, FLAC 和 FFmpeg（仅音频）。通过以下步骤您可以构建包括这些扩招的演示应用程序：
 
@@ -89,11 +89,11 @@ ExoPlayer 具有许多扩展，允许使用捆绑的软件解码器，包括 AV1
 
 默认情况下，仅当不存在合适的平台解码器时才使用扩展解码器。可以指定扩展解码器为首选，如以下各节所述。
 
-#### 1.2.5播放自己的内容
+### 1.2.5播放自己的内容
 
 有多种方法可以在演示应用程序中播放自己的内容。
 
-##### a). 编辑assets/media.exolist.json
+#### a). 编辑assets/media.exolist.json
 
 演示应用程序中列出的示例是从 `assets/media.exolist.json` 中加载的。通过编辑此 JSON 文件，可以在演示应用程序中添加和删除示例。模式如下，其中 [O] 表示可选属性。
 
@@ -171,7 +171,7 @@ ExoPlayer 具有许多扩展，允许使用捆绑的软件解码器，包括 AV1
 
 在样本选择器活动中，拓展菜单用于指定是否使用扩展解码器和选择应使用哪种 ABR 算法。
 
-##### b). 加载外部 exolist.json 文件
+#### b). 加载外部 exolist.json 文件
 
 演示应用程序可以使用上面的架构加载外部 JSON 文件，并按照 `*.exolist.json` 约定命名。例如，如果您将这样的文件托管在 `https://yourdomain.com/samples.exolist.json`，则可以使用以下示例在演示应用中将其打开：
 
@@ -182,7 +182,7 @@ adb shell am start -a com.android.action.VIEW \
 
 单击`*.exolist.json`安装了演示应用程序的设备上的链接（例如，在浏览器或电子邮件客户端中），也会在演示应用程序中将其打开。因此，托管`*.exolist.json`JSON文件提供了一种将内容分发给其他人以在演示应用程序中尝试的简单方法。
 
-##### c). 使用 Intent
+#### c). 使用 Intent
 
 Intent 可用于绕过样本列表并直接启动播放。要播放单个样本，请将 Intent 的 action 设置为 `com.google.android.exoplayer.demo.action.VIEW` 并将其数据 URI 设置为要播放的样本。可以使用以下方法从终端启动此 Intent：
 
@@ -225,7 +225,7 @@ adb shell am start -a com.google.android.exoplayer.demo.action.VIEW_LIST \
     --es extension_1 mpd
 ```
 
-### 1.3 支持的格式 [Supported formats](https://exoplayer.dev/supported-formats.html)
+## 1.3 支持的格式 [Supported formats](https://exoplayer.dev/supported-formats.html)
 
 在定义ExoPlayer支持的格式时，请务必注意，“媒体格式”是在多个级别上定义的。从最低级别到最高级别分别为：
 
@@ -235,9 +235,9 @@ adb shell am start -a com.google.android.exoplayer.demo.action.VIEW_LIST \
 
 以下各节从最高到最低分别定义了ExoPlayer的支持。最后两节介绍了对独立字幕格式和HDR视频播放的支持。
 
-#### 1.3.1自适应流
+### 1.3.1自适应流
 
-##### a). DASH
+#### a). DASH
 
 ExoPlayer支持具有多种文件格式的DASH。必须对媒体流进行解复用，这意味着必须在DASH清单中的不同AdaptationSet元素中定义视频，音频和文本（CEA-608是一个例外，如下表所述）。还必须支持所包含的音频和视频样本格式（有关详细信息，请参阅 [样本格式](https://exoplayer.dev/supported-formats.html#sample-formats)部分）。
 
@@ -259,7 +259,7 @@ ExoPlayer支持具有多种文件格式的DASH。必须对媒体流进行解复�
 | PlayReady SL2000    |   是   | 仅Android TV                                                 |
 | ClearKey            |   是   | API 21+                                                      |
 
-##### b). SmoothStreaming
+#### b). SmoothStreaming
 
 ExoPlayer支持FMP4容器格式的SmoothStreaming。必须对媒体流进行解复用，这意味着必须在SmoothStreaming清单的不同StreamIndex元素中定义视频，音频和文本。还必须支持所包含的音频和视频样本格式（有关详细信息，请参阅 [采样格式](https://exoplayer.dev/supported-formats.html#sample-formats)部分）。
 
@@ -272,7 +272,7 @@ ExoPlayer支持FMP4容器格式的SmoothStreaming。必须对媒体流进行解�
 | **内容保护**        |        |              |
 | PlayReady SL2000    |   是   | 仅Android TV |
 
-##### c). HLS
+#### c). HLS
 
 ExoPlayer支持具有多种容器格式的HLS。还必须支持所包含的音频和视频样本格式（有关详细信息，请参阅 [采样格式](https://exoplayer.dev/supported-formats.html#sample-formats)部分）。我们强烈鼓励HLS内容制作产生高品质的HLS流，描述 [在这里](https://medium.com/google-exoplayer/hls-playback-in-exoplayer-a33959a47be7)。
 
@@ -294,7 +294,7 @@ ExoPlayer支持具有多种容器格式的HLS。还必须支持所包含的音�
 | Widevine            |   是   | API 19 +（“ cenc”方案）和25 +（“ cbcs”方案） |
 | PlayReady SL2000    |   是   | 仅Android TV                                 |
 
-##### d).Progressive container formats
+#### d).Progressive container formats
 
 ExoPlayer可以直接播放以下容器格式的流。还必须支持所包含的音频和视频样本格式（有关详细信息，请参阅 [样本格式](https://exoplayer.dev/supported-formats.html#sample-formats)部分）。
 
@@ -321,13 +321,13 @@ ExoPlayer可以直接播放以下容器格式的流。还必须支持所包含�
 
 *** [FLAC扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/flac)提取器输出原始音频，框架可以在所有API级别上对其进行处理。所述[核心库](https://github.com/google/ExoPlayer/tree/release-v2/library/core) FLAC提取器输出FLAC音频帧等依赖于具有FLAC解码器（例如，`MediaCodec` 用于处理FLAC（从API级27需要解码器），或者 [FFmpeg的扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/ffmpeg)使能与FLAC）。该`DefaultExtractorsFactory`如果应用程序使用内置使用扩展提取[FLAC扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/flac)。否则，它将使用[核心库](https://github.com/google/ExoPlayer/tree/release-v2/library/core)提取器。
 
-#### 1.3.4 采样格式(or 编码格式?）
+### 1.3.4 采样格式(or 编码格式?）
 
 默认情况下，ExoPlayer使用Android的平台解码器。因此，受支持的样本格式取决于基础平台而不是ExoPlayer。[此处](https://developer.android.com/guide/appendix/media-formats.html#core)记录了Android设备支持的示例格式 。请注意，个别设备可能支持所列格式以外的其他格式。
 
 除了Android的平台解码器之外，ExoPlayer还可以利用软件解码器扩展。这些必须手动构建并包含在希望使用它们的项目中。我们目前为[AV1](https://github.com/google/ExoPlayer/tree/release-v2/extensions/av1)， [VP9](https://github.com/google/ExoPlayer/tree/release-v2/extensions/vp9)， [FLAC](https://github.com/google/ExoPlayer/tree/release-v2/extensions/flac)， [Opus](https://github.com/google/ExoPlayer/tree/release-v2/extensions/opus)和 [FFmpeg](https://github.com/google/ExoPlayer/tree/release-v2/extensions/ffmpeg)提供软件解码器扩展 。
 
-##### FFmpeg扩展
+#### FFmpeg扩展
 
 [FFmpeg扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/ffmpeg)支撑件进行解码的各种不同的音频样本格式。您可以选择在构建扩展时要包括的解码器，如扩展的[README.md中所述](https://github.com/google/ExoPlayer/tree/release-v2/extensions/ffmpeg/README.md)。下表提供了从音频样本格式到相应的FFmpeg解码器名称的映射。
 
@@ -348,7 +348,7 @@ ExoPlayer可以直接播放以下容器格式的流。还必须支持所包含�
 |   DTS, DTS-HD | dca             |
 |        TrueHD | mlp truehd      |
 
-#### 1.3.5 独立字幕格式
+### 1.3.5 独立字幕格式
 
 ExoPlayer支持多种格式的独立字幕文件。字幕文件可以按照[Media source](https://exoplayer.dev/media-sources.html#side-loading-a-subtitle-file)说明进行侧面加载。
 
@@ -359,13 +359,13 @@ ExoPlayer支持多种格式的独立字幕文件。字幕文件可以按照[Medi
 | 子纹                         |   是   | MimeTypes.APPLICATION_SUBRIP |
 | SubStationAlpha（SSA / ASS） |   是   | MimeTypes.TEXT_SSA           |
 
-#### 1.3.6 HDR视频播放
+### 1.3.6 HDR视频播放
 
 ExoPlayer可处理各种容器中的高动态范围（HDR）视频提取，包括MP4中的Dolby Vision和Matroska / WebM中的HDR10 +。解码和显示HDR内容取决于Android平台和设备的支持。请参阅 [HDR视频播放](https://source.android.com/devices/tech/display/hdr.html) ，以了解有关检查HDR解码/显示功能以及跨Android版本的HDR支持限制的信息。
 
 当播放需要支持特定编解码器配置文件的HDR流时，ExoPlayer的默认`MediaCodec`选择器将选择支持该配置文件的解码器（如果可用），即使在不支持该配置文件的相同MIME类型的另一解码器出现在较高位置时，编解码器列表。如果流超过了相同MIME类型的硬件解码器的功能，则可能导致选择软件解码器。
 
-### 1.4 支持的设备 [**Supported devices**](https://exoplayer.dev/supported-devices.html)
+## 1.4 支持的设备 [**Supported devices**](https://exoplayer.dev/supported-devices.html)
 
 核心ExoPlayer用例所需的最低Android版本是：
 
@@ -390,6 +390,6 @@ ExoPlayer可处理各种容器中的高动态范围（HDR）视频提取，包�
 - **Nexus Player（仅在使用HDMI至DVI电缆时）** -仅当设备使用某种类型的HDMI至DVI电缆连接到显示器时，才会影响Nexus Player，这会导致视频播放速度过快。对于终端用户，使用HDMI转DVI电缆不切实际，因为此类电缆无法传输音频。因此，可以安全地忽略此问题。我们建议使用实际的用户场景（例如，使用标准HDMI电缆连接到电视的设备）进行开发和测试。
 - **模拟器** -一些Android模拟器无法正确实现Android媒体堆栈的组件，因此不支持ExoPlayer。这是模拟器的问题，而不是ExoPlayer的问题。Android的官方模拟器（Android Studio中的“虚拟设备”）支持ExoPlayer，前提是系统映像的API级别至少为23。API级别较早的系统映像不支持ExoPlayer。第三方仿真器提供的支持水平各不相同。在第三方仿真器上运行ExoPlayer的问题应报告给模拟器的开发人员，而不是报告给ExoPlayer团队。在可能的情况下，我们建议在物理设备而不是模拟器上测试媒体应用程序。
 
-### 1.5 词汇表 [**Glossary**](https://exoplayer.dev/glossary.html)
+## 1.5 词汇表 [**Glossary**](https://exoplayer.dev/glossary.html)
 
 略
