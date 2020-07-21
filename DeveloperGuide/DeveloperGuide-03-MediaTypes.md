@@ -555,7 +555,7 @@ ExoPlayer可以直接播放以下容器格式的流。还必须支持所包含�
 
 *不支持查找，因为容器不提供元数据（例如样本索引）以允许媒体播放器以有效方式执行查找。如果需要查找，我们建议使用更合适的文件格式。
 
-**这些提取器具有`FLAG_ENABLE_CONSTANT_BITRATE_SEEKING`用于使用恒定比特率假设进行近似搜索的标志。默认情况下不启用此功能。最简单的方法使用`DefaultExtractorsFactory.setConstantBitrateSeekingEnabled`来启用此功能支持所有提取，[这里是具体描述](https://exoplayer.dev/progressive.html#enabling-constant-bitrate-seeking)。
+**这些提取器具有`FLAG_ENABLE_CONSTANT_BITRATE_SEEKING`用于使用恒定比特率假设进行近似定位的标志。默认情况下不启用此功能。最简单的方法使用`DefaultExtractorsFactory.setConstantBitrateSeekingEnabled`来启用此功能支持所有提取，[这里是具体描述](https://exoplayer.dev/progressive.html#enabling-constant-bitrate-seeking)。
 
 *** [FLAC扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/flac)提取器输出原始音频，框架可以在所有API级别上对其进行处理。所述[核心库](https://github.com/google/ExoPlayer/tree/release-v2/library/core) FLAC提取器输出FLAC音频帧等依赖于具有FLAC解码器（例如，`MediaCodec` 用于处理FLAC（从API级27需要解码器），或者 [FFmpeg的扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/ffmpeg)使能与FLAC）。该`DefaultExtractorsFactory`如果应用程序使用内置使用扩展提取[FLAC扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/flac)。否则，它将使用[核心库](https://github.com/google/ExoPlayer/tree/release-v2/library/core)提取器。
 
@@ -593,9 +593,9 @@ ProgressiveMediaSource progressiveMediaSource =
         .createMediaSource(progressiveUri);
 ```
 
-#### 启用恒定比特率搜索
+#### 启用恒定比特率定位
 
-对于MP3，ADTS和AMR流，您可以使用带有`FLAG_ENABLE_CONSTANT_BITRATE_SEEKING`标志的恒定比特率假设来启用近似搜索。可以使用上述方法为各个提取程序设置这些标志。要为支持该能力的所有提取程序启用恒定比特率搜索，请使用`DefaultExtractorsFactory.setConstantBitrateSeekingEnabled`。
+对于MP3，ADTS和AMR流，您可以使用带有`FLAG_ENABLE_CONSTANT_BITRATE_SEEKING`标志的恒定比特率假设来启用近似定位。可以使用上述方法为各个提取程序设置这些标志。要为支持该能力的所有提取程序启用恒定比特率定位，请使用`DefaultExtractorsFactory.setConstantBitrateSeekingEnabled`。
 
 ```java
 DefaultExtractorsFactory extractorsFactory =

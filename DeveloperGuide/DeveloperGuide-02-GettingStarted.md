@@ -114,7 +114,7 @@ player.prepare(videoSource);
 
 ### 2.1.5 控制播放器
 
-准备好播放器后，可以通过调用播放器上的方法来控制播放。例如，`setPlayWhenReady`开始和暂停播放，各种`seekTo`方法都可以在媒体中搜索，`setRepeatMode`控制是否循环媒体以及如何循环播放，`setShuffleModeEnabled`控制播放列表改组以及 `setPlaybackParameters`调整播放速度和音高。
+准备好播放器后，可以通过调用播放器上的方法来控制播放。例如，`setPlayWhenReady`开始和暂停播放，各种`seekTo`定位`setRepeatMode`控制是否循环媒体以及如何循环播放，`setShuffleModeEnabled`控制播放列表改组以及 `setPlaybackParameters`调整播放速度和音高。
 
 如果播放器绑定到`PlayerView`或`PlayerControlView`，则用户与这些组件的交互将导致调用播放器上的相应方法。
 
@@ -192,15 +192,15 @@ public void onPlayerError(ExoPlaybackException error) {
 }
 ```
 
-#### c) 搜索 //TODO 机翻调整
+#### c) 定位
 
 调用`Player.seekTo`方法会导致对已注册`Player.EventListener`实例的一系列回调 ：
 
 1. `onPositionDiscontinuity`与`reason=DISCONTINUITY_REASON_SEEK`。这是调用的直接结果`Player.seekTo`。
-2. `onPlayerStateChanged`以及与搜索相关的任何即时状态更改。请注意，状态可能不会发生任何变化，例如，是否可以在已加载的缓冲区中解析搜索。
-3. `onSeekProcessed`。这表明玩家已完成搜索，并且已进行了所有必要的更改。如果播放器需要从搜寻到的位置缓冲新数据，则播放状态将 `Player.STATE_BUFFERING`在这一点上。
+2. `onPlayerStateChanged`以及与定位相关的任何即时状态更改。请注意，状态可能不会发生任何变化，例如，是否可以在已加载的缓冲区中解析定位。
+3. `onSeekProcessed`。这表明玩家已完成定位，并且已进行了所有必要的更改。如果播放器需要从定位到的位置缓冲新数据，则播放状态将 `Player.STATE_BUFFERING`在这一点上。
 
-如果您使用`AnalyticsListener`，则会在`onSeekStarted`之前有一个附加事件 `onPositionDiscontinuity`，以指示在搜寻开始之前的播放位置。
+如果您使用`AnalyticsListener`，则会在`onSeekStarted`之前有一个附加事件 `onPositionDiscontinuity`，以指示在定位开始之前的播放位置。
 
 ### 其他SimpleExoPlayer监听器
 
@@ -454,7 +454,7 @@ public void onPositionDiscontinuity(@Player.DiscontinuityReason int reason) {
 当前播放项目更改时可能有三种类型的事件回调：
 
 1. `EventListener.onPositionDiscontinuity`中回调`reason = Player.DISCONTINUITY_REASON_PERIOD_TRANSITION`。当播放自动从一项过渡到另一项时，会触发此回调。
-2. `EventListener.onPositionDiscontinuity`中回调`reason = Player.DISCONTINUITY_REASON_SEEK`。当当前播放项作为搜索操作的一部分而发生更改时（例如，在调用 `Player.next`时）。
+2. `EventListener.onPositionDiscontinuity`中回调`reason = Player.DISCONTINUITY_REASON_SEEK`。当当前播放项作为定位操作的一部分而发生更改时（例如，在调用 `Player.next`时）。
 3. `EventListener.onTimelineChanged`中回调`reason = Player.TIMELINE_CHANGE_REASON_DYNAMIC`。当播放列表发生更改时（例如，添加，移动或删除项目）。
 
 在任何情况下，当您的应用程序代码接收到该事件时，您可以查询播放器以确定正在播放播放列表中的哪个项目。例如，可以使用`Player.getCurrentWindowIndex`和`Player.getCurrentTag`。如果您只想检测播放列表项的更改，则有必要与最新的已知窗口索引或标签进行比较，因为这些事件可能由于其他原因而触发。

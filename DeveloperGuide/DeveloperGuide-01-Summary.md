@@ -305,19 +305,19 @@ ExoPlayer可以直接播放以下容器格式的流。还必须支持所包含�
 | FMP4       |   是   |                                                              |
 | WebM       |   是   |                                                              |
 | Matroska   |   是   |                                                              |
-| MP3        |   是   | 某些流只能使用恒定比特率搜索来搜索**                         |
+| MP3        |   是   | 某些流只能使用恒定比特率定位**                               |
 | Ogg        |   是   | 包含Vorbis，Opus和FLAC                                       |
 | WAV        |   是   |                                                              |
 | MPEG-TS    |   是   |                                                              |
 | MPEG-PS    |   是   |                                                              |
-| FLV        |   是   | 不可搜索*                                                    |
-| ADTS (AAC) |   是   | 仅可使用恒定比特率搜索来搜索**                               |
+| FLV        |   是   | 不可定位*                                                    |
+| ADTS (AAC) |   是   | 仅可使用恒定比特率定位**                                     |
 | FLAC       |   是   | 在[核心库中](https://github.com/google/ExoPlayer/tree/release-v2/library/core)使用[FLAC扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/flac)或FLAC提取器*** |
-| AMR        |   是   | 仅可使用恒定比特率搜索来搜索**                               |
+| AMR        |   是   | 仅可使用恒定比特率定位**                                     |
 
-*不支持查找，因为容器不提供元数据（例如样本索引）以允许媒体播放器以有效方式执行查找。如果需要查找，我们建议使用更合适的容器格式。
+*不支持定位，因为容器不提供元数据（例如样本索引）以允许媒体播放器以有效方式执行定位。如果需要定位，我们建议使用更合适的容器格式。
 
-**这些提取器具有`FLAG_ENABLE_CONSTANT_BITRATE_SEEKING`用于使用恒定比特率假设进行近似搜索的标志。默认情况下不启用此功能。最简单的方法来启用此功能支持它的是使用所有提取 `DefaultExtractorsFactory.setConstantBitrateSeekingEnabled`，描述 [在这里](https://exoplayer.dev/progressive.html#enabling-constant-bitrate-seeking)。
+**这些提取器具有`FLAG_ENABLE_CONSTANT_BITRATE_SEEKING`用于使用恒定比特率假设进行近似定位的标志。默认情况下不启用此功能。最简单的方法来启用此功能支持它的是使用所有提取 `DefaultExtractorsFactory.setConstantBitrateSeekingEnabled`，描述 [在这里](https://exoplayer.dev/progressive.html#enabling-constant-bitrate-seeking)。
 
 *** [FLAC扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/flac)提取器输出原始音频，框架可以在所有API级别上对其进行处理。所述[核心库](https://github.com/google/ExoPlayer/tree/release-v2/library/core) FLAC提取器输出FLAC音频帧等依赖于具有FLAC解码器（例如，`MediaCodec` 用于处理FLAC（从API级27需要解码器），或者 [FFmpeg的扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/ffmpeg)使能与FLAC）。该`DefaultExtractorsFactory`如果应用程序使用内置使用扩展提取[FLAC扩展](https://github.com/google/ExoPlayer/tree/release-v2/extensions/flac)。否则，它将使用[核心库](https://github.com/google/ExoPlayer/tree/release-v2/library/core)提取器。
 
