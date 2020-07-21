@@ -1,5 +1,7 @@
 [开发者指南原文](https://exoplayer.dev/)
 
+[TOC]
+
 # 3. 媒体类型
 
 ## 3.1 [DASH](https://exoplayer.dev/dash.html)

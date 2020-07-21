@@ -1,5 +1,7 @@
 [开发者指南原文](https://exoplayer.dev/)
 
+[TOC]
+
 # 4. 进阶主题
 
 ## 4.1 数字版权管理 [DRM](https://exoplayer.dev/drm.html)
